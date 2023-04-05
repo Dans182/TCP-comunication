@@ -22,22 +22,24 @@ Widget::Widget(QWidget *parent)
         receivedPosxPosy = T.readAll();
         ui->listWidget->addItem(receivedPosxPosy);
         qDebug() << "receivedPosxPosy" << receivedPosxPosy;
-        QStringList coorde = receivedPosxPosy.split(',');
-        qDebug() << "coorde" << coorde[0] << coorde[1];
+        QStringList coordenadas = receivedPosxPosy.split(',');
+        qDebug() << "coorde" << coordenadas[0] << coordenadas[1];
         QList<QPoint> puntos;
 
-        for (int i = 0; i < coorde.size(); i++) {
+        for (int i = 0; i < coordenadas.size(); i++) {
 //            QStringList coordenadas = coorde[i].split(",");
 //            qDebug() << "coordenadas" << coordenadas;
-            //            int x = coordenadas[0].toInt();
-            //            int y = coordenadas[1].toInt();
-            //            puntos.append(QPoint(x, y));
+                        int xx = coordenadas[0].toInt();
+                        int yy = coordenadas[1].toInt();
+                        puntos.append(QPoint(xx, yy));
+                        qDebug() << "21" << xx;
         }
-        //        for (int i = 0; i < puntos.size(); i++) {
-        //            qDebug() << "Punto" << i << ":" << puntos[i].x() << "," << puntos[i].y();
-        //        }
+        //qDebug() << xx << yy;
+                for (int i = 0; i < puntos.size(); i++) {
+                    qDebug() << puntos[i].x() << "," << puntos[i].y();
+                }
 
-        //        return 0;
+                return 0;
         //pos_x = receivedPosxPosy[0];
         //pos_y = receivedPosxPosy[1];
         QQmlEngine engine;
