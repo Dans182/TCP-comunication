@@ -4,8 +4,6 @@
 #include <QTextStream>
 #include <QQmlEngine>
 #include <QQmlComponent>
-#include <QQuickWindow>
-#include <QQmlProperty>
 #include <QPoint>
 
 Widget::Widget(QWidget *parent)
@@ -33,10 +31,11 @@ Widget::Widget(QWidget *parent)
         //inicialización del QML
         QQmlEngine engine;
         QQmlComponent component(&engine, QUrl::fromLocalFile("/home/userti/Repos QT/TCPServer/client/client.qml"));
+        //inicializo la ventana.
         QObject *object = component.create();
         object->findChild<QObject *>("clientWindow");
         QObject *child = object->children()[1];
-        qDebug() << child;
+        //qDebug() << child;
         child->setProperty("x", pos_x);
         child->setProperty("y", pos_y);
 

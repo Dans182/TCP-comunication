@@ -10,6 +10,7 @@
 #include <QQmlApplicationEngine>
 #include <QQuickView>
 #include <QQmlComponent>
+#include <QTimer>
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -32,15 +33,14 @@ void Widget::on_iniciar_clicked()
     else {
         QMessageBox::information(this, "servidor", "Iniciado...");
         ui->iniciar->setEnabled(false);
-//        QQmlEngine engine;
-//        QQmlComponent component(&engine,
-//                                QUrl::fromLocalFile("/home/userti/Repos QT/TCPServer/client.qml"));
-//        QObject *object = component.create();
     }
 }
 
 void Widget::on_enviar_clicked()
 {
+    QTimer *timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, QOverload<>::of(&AnalogClock::update));
+    timer->start(1000);
     pos_x = QRandomGenerator::global()->bounded(1000);
     pos_y = QRandomGenerator::global()->bounded(1000);
     mLocalServer->envia(pos_x, pos_y);
