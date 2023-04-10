@@ -9,23 +9,23 @@ Window {
     title: qsTr("Hello World")
 
     Text {
-        id: miTexto
+        id: myText
         text: "Mi texto"
         x: pos_x
         y: pos_y
     }
 
-//    Rectangle {
-//        width: 340
-//        height: 340
-//        color: "steelblue"
-//        Component.onCompleted: {
-//            console.log(width)
-//        }
-//        anchors {
-//            top: parent.top
-//        }
-//    }
+    //    Rectangle {
+    //        width: 340
+    //        height: 340
+    //        color: "steelblue"
+    //        Component.onCompleted: {
+    //            console.log(width)
+    //        }
+    //        anchors {
+    //            top: parent.top
+    //        }
+    //    }
 }
 
 
