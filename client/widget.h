@@ -16,6 +16,10 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
+    void setNewCoordinates(QStringList newCoordinates);
+
+signals:
+    void newCoordinatesReceived();
 
 private slots:
     void on_conectar_clicked();
@@ -25,5 +29,9 @@ private slots:
 private:
     Ui::Widget *ui;
     QTcpSocket *mSocket;
+    QString receivedPosxPosy;
+    int pos_x, pos_y;
+    QStringList coordenadas;
+
 };
 #endif // WIDGET_H

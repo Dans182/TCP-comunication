@@ -18,6 +18,10 @@ public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
 
+signals:
+    void newCoordinatesSended();
+    void serverOn();
+
 private slots:
     void on_iniciar_clicked();
 

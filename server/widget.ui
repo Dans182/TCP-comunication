@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -36,6 +36,9 @@
        <widget class="QSpinBox" name="puerto">
         <property name="maximum">
          <number>999999999</number>
+        </property>
+        <property name="value">
+         <number>12345</number>
         </property>
        </widget>
       </item>
