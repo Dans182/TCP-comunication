@@ -17,36 +17,33 @@ Widget::Widget(QWidget *parent)
 
     connect(mSocket, &QTcpSocket::readyRead, [&](){
         QString receivedPosxPosy;
-        QPoint pos_x, pos_y;
+        int pos_x, pos_y;
         QTextStream T(mSocket);
         receivedPosxPosy = T.readAll();
         ui->listWidget->addItem(receivedPosxPosy);
         qDebug() << "receivedPosxPosy" << receivedPosxPosy;
         QStringList coordenadas = receivedPosxPosy.split(',');
-        qDebug() << "coorde" << coordenadas[0] << coordenadas[1];
+        qDebug() << "coorde" << coordenadas << coordenadas[0] << coordenadas[1];
         QList<QPoint> puntos;
-
         for (int i = 0; i < coordenadas.size(); i++) {
-//            QStringList coordenadas = coorde[i].split(",");
-//            qDebug() << "coordenadas" << coordenadas;
-                        int xx = coordenadas[0].toInt();
-                        int yy = coordenadas[1].toInt();
-                        puntos.append(QPoint(xx, yy));
-                        qDebug() << "21" << xx;
+            pos_x = coordenadas[0].toInt();
+            pos_y = coordenadas[1].toInt();
+            puntos.append(QPoint(pos_x, pos_y));
+            qDebug() << pos_x << pos_y;
         }
         //qDebug() << xx << yy;
-                for (int i = 0; i < puntos.size(); i++) {
-                    qDebug() << puntos[i].x() << "," << puntos[i].y();
-                }
+        //                for (int i = 0; i < puntos.size(); i++) {
+        //                    qDebug() << puntos[i].x() << "," << puntos[i].y();
+        //                }
 
-                return 0;
+        //                return 0;
         //pos_x = receivedPosxPosy[0];
         //pos_y = receivedPosxPosy[1];
         QQmlEngine engine;
         QQmlComponent component(&engine, QUrl::fromLocalFile("/home/userti/Repos QT/TCPServer/client/client.qml"));
         QObject *object = component.create();
         object->findChild<QObject*>("miTexto");
-        QPoint position = (pos_x, pos_y);
+        //QPoint position = (pos_x, pos_y);
         //qDebug() << object;
         object->setProperty("x", pos_x);
         qDebug() << "x" << pos_x << pos_y;
