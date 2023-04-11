@@ -16,7 +16,8 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
-    void setNewCoordinates(QStringList newCoordinates);
+    void setNewCoordinates(QObject *object, int pos_x, int pos_y);
+    void initializationQML(int &pos_x, int &pos_y);
 
 signals:
     void newCoordinatesReceived();
