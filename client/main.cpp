@@ -8,5 +8,6 @@ int main(int argc, char *argv[])
     app.setApplicationDisplayName("Cliente");
     Widget w;
     w.show();
+
     return app.exec();
 }

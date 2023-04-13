@@ -3,7 +3,6 @@
 #include "localserver.h"
 #include <QMessageBox>
 #include <QRandomGenerator>
-//#include <QTimer>
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -11,6 +10,7 @@ Widget::Widget(QWidget *parent)
 {
     ui->setupUi(this);
     mLocalServer = new LocalServer(this);
+
 }
 
 Widget::~Widget()
@@ -19,14 +19,13 @@ Widget::~Widget()
 }
 
 void Widget::on_iniciar_clicked()
-{
-    if (!mLocalServer->listen(QHostAddress::Any, ui->puerto->value())) {
+{  
+    if (!mLocalServer->listen(QHostAddress::Any, 12345)) {
         QMessageBox::critical(this, "Error", mLocalServer->errorString());
     }
     else {
         QMessageBox::information(this, "servidor", "Iniciado...");
         ui->iniciar->setEnabled(false);
-        emit serverOn();
     }
 }
 

@@ -17,13 +17,14 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
+    void on_iniciar_clicked();
 
 signals:
     void newCoordinatesSended();
-    void serverOn();
 
 private slots:
-    void on_iniciar_clicked();
+
+    //void on_iniciar_clicked();
 
     void on_enviar_clicked();
 

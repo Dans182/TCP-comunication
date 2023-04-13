@@ -4,7 +4,6 @@
 #include <QTextStream>
 #include <QQmlEngine>
 #include <QQmlComponent>
-#include <QPoint>
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -19,23 +18,37 @@ Widget::~Widget() //destructor
     delete ui;
 }
 
-void setNewCoordinates(QObject *object, int pos_x, int pos_y){
+void Widget::setNewCoordinates(QObject *object, int &pos_x, int &pos_y){
     QObject *childText = object->children()[1];
-    childText->setProperty("x", pos_x);
-    childText->setProperty("y", pos_y);
+
+    if(childText->property("x") == 0 &&
+            childText->property("y") == 0)
+    {
+        qDebug() << childText->property("x").toInt() << pos_x;
+        childText->setProperty("x", pos_x);
+        childText->setProperty("y", pos_y);
+        qDebug() << "esto es un if";
+        //            setNewCoordinates(object, pos_x, pos_y);
+    }
+    else
+    {
+        qDebug() << childText->property("x").toInt() << pos_x;
+        qDebug() << "esto es un else";
+    }
 };
 
-void Widget::initializationQML(int &pos_x, int &pos_y){
+
+void Widget::initializationQML(){
     QQmlEngine engine;
     QQmlComponent component(&engine, QUrl::fromLocalFile("/home/userti/Repos QT/TCPServer/client/client.qml"));
     QObject *object = component.create();
-    ::setNewCoordinates(object, pos_x, pos_y);
+    setNewCoordinates(object, pos_x, pos_y);
 };
 
 void Widget::on_conectar_clicked() //botón conectar
 {
     ui->conectar->setEnabled(false);
-    mSocket->connectToHost(ui->servidor->text(), ui->puerto->value());
+    mSocket->connectToHost("localhost", 12345);
 
     connect(mSocket, &QTcpSocket::readyRead, [&](){
         //recepcion de coordenadas desde servidor y transformacion a coordenadas pos_x y pos_y
@@ -49,7 +62,7 @@ void Widget::on_conectar_clicked() //botón conectar
             pos_y = coordenadas[1].toInt();
         }
         //inicialización del QML
-        initializationQML(pos_x, pos_y);
+        initializationQML();
     });
 }
 void Widget::on_quitar_clicked() //botón cerrar

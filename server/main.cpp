@@ -1,5 +1,4 @@
 #include "widget.h"
-
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -8,5 +7,7 @@ int main(int argc, char *argv[])
     a.setApplicationDisplayName("Servidor");
     Widget w;
     w.show();
+    w.on_iniciar_clicked();
+
     return a.exec();
 }

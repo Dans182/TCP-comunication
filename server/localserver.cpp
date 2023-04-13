@@ -18,7 +18,6 @@ void LocalServer::envia(const int &pos_x, int &pos_y)
     if(mSocket){
         QTextStream T(mSocket);
         T << pos_x << "," << pos_y;
-        //qDebug() << pos_x << pos_y;
         mSocket->flush();
     }
 }
